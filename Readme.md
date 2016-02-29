@@ -9,7 +9,7 @@ import retry from 'async-retry';
 import fetch from 'node-fetch';
 
 export default async function getSomething () {
-  const res = await retry(async (bail) => {
+  return await retry(async (bail) => {
     // if anything throws, we retry
     const res = await fetch('https://google.com');
 
