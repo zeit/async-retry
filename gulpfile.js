@@ -38,4 +38,4 @@ gulp.task('clean', function () {
   return del(['build']);
 });
 
-gulp.task('default', ['lint', 'compile', 'test']);
+gulp.task('default', ['lint', 'compile']);
