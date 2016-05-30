@@ -39,7 +39,7 @@ test('bail', async (t) => {
   }
 });
 
-test.only('bail + return', async (t) => {
+test('bail + return', async (t) => {
   let _err;
   try {
     await Promise.resolve(retry(async (bail, num) => {
