@@ -33,10 +33,40 @@ test('bail', async (t) => {
       }
 
       throw new Error('Test ' + num);
-    }, { retries: 10 });
+    }, { retries: 3 });
   } catch (err) {
     t.same('Wont retry', err.message);
   }
+});
+
+test.only('bail + return', async (t) => {
+  let _err;
+  try {
+    await Promise.resolve(retry(async (bail, num) => {
+      await sleep(200);
+      await sleep(200);
+      bail(new Error('woot'));
+    }));
+  } catch (err) {
+    _err = err;
+  }
+  t.same(_err.message, 'woot');
+});
+
+test('bail error', async (t) => {
+  let retries = 0;
+  try {
+    await retry(async (bail, num) => {
+      retries++;
+      await sleep(100);
+      const err = Error('Wont retry');
+      err.bail = true;
+      throw err;
+    }, { retries: 3 });
+  } catch (err) {
+    t.same('Wont retry', err.message);
+  }
+  t.same(retries, 1);
 });
 
 test('with non-async functions', async (t) => {
