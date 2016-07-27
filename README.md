@@ -1,4 +1,4 @@
-# async-retry
+# async-retry [![Build Status](https://travis-ci.org/zeit/async-retry.svg?branch=master)](https://travis-ci.org/zeit/async-retry)
 
 Retrying made simple, easy, async.
 
