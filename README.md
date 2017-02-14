@@ -49,6 +49,5 @@ retry(retrier : Function, opts : Object) => Promise
 
 ## Credits
 
-- Copyright © 2016 Zeit, Inc and project authors.
-- Licensed under MIT.
-- ▲
+- Guillermo Rauch ([@rauchg](https://twitter.com/rauchg)) - [▲ZEIT](https://zeit.co)
+- Leo Lamprecht ([@notquiteleo](https://twitter.com/notquiteleo)) - [▲ZEIT](https://zeit.co)
