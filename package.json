@@ -21,8 +21,7 @@
     ]
   },
   "dependencies": {
-    "retry": "0.10.0",
-    "babel-runtime": "6.11.6"
+    "retry": "0.10.0"
   },
   "devDependencies": {
     "ava": "0.16.0",
