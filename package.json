@@ -9,6 +9,7 @@
   "scripts": {
     "test": "xo && ava"
   },
+  "license": "MIT",
   "ava": {
     "failFast": true
   },
@@ -21,12 +22,12 @@
     ]
   },
   "dependencies": {
-    "retry": "0.10.0"
+    "retry": "0.10.1"
   },
   "devDependencies": {
-    "ava": "0.16.0",
+    "ava": "0.18.1",
     "node-fetch": "1.6.3",
     "then-sleep": "1.0.1",
-    "xo": "0.17.0"
+    "xo": "0.17.1"
   }
 }
