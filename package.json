@@ -9,14 +9,8 @@
   "scripts": {
     "test": "xo && ava"
   },
-  "greenkeeper": {
-    "emails": false
-  },
   "ava": {
-    "failFast": true,
-    "files": [
-      "test/*.js"
-    ]
+    "failFast": true
   },
   "xo": {
     "esnext": true,
