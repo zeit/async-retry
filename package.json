@@ -10,6 +10,7 @@
     "test": "xo && ava"
   },
   "license": "MIT",
+  "repository": "zeit/release",
   "ava": {
     "failFast": true
   },
