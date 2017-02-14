@@ -9,23 +9,23 @@ Retrying made simple, easy, async.
 ## How to use
 
 ```js
-import retry from 'async-retry';
-import fetch from 'node-fetch';
+import retry from 'async-retry'
+import fetch from 'node-fetch'
 
-export default async function getSomething () {
-  return await retry(async bail => {
-    // if anything throws, we retry
-    const res = await fetch('https://google.com');
+await retry(async bail => {
+  // if anything throws, we retry
+  const res = await fetch('https://google.com')
 
-    if (403 === res.status) {
-      // don't retry upon 403
-      bail(new Error('Unauthorized'));
-    }
+  if (403 === res.status) {
+    // don't retry upon 403
+    bail(new Error('Unauthorized'))
+  }
 
-    const data = await res.text();
-    return data.substr(0, 500);
-  }, { retries: 500 });
-}
+  const data = await res.text()
+  return data.substr(0, 500)
+}, {
+  retries: 500
+})
 ```
 
 ### API
