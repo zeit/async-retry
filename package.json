@@ -10,7 +10,7 @@
     "test": "xo && ava"
   },
   "license": "MIT",
-  "repository": "zeit/release",
+  "repository": "zeit/async-retry",
   "ava": {
     "failFast": true
   },
