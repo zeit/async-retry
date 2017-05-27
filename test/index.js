@@ -1,7 +1,7 @@
 import test from 'ava'
 import fetch from 'node-fetch'
 import sleep from 'then-sleep'
-import retry from '../lib'
+import retry from '../dist'
 
 test('return value', async t => {
   const val = await retry(async (bail, num) => {
