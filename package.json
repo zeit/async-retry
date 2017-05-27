@@ -2,12 +2,19 @@
   "name": "async-retry",
   "version": "1.0.0",
   "description": "Retrying made simple, easy and async",
-  "main": "./lib/index",
+  "main": "./dist/index",
   "files": [
-    "lib"
+    "dist"
   ],
   "scripts": {
-    "test": "xo && ava"
+    "build": "babel lib/index.js > dist/index.js",
+    "test": "npm run build && xo && ava",
+    "prepublish": "npm run build"
+  },
+  "babel": {
+    "presets": [
+      "es2015"
+    ]
   },
   "license": "MIT",
   "repository": "zeit/async-retry",
@@ -23,10 +30,12 @@
     ]
   },
   "dependencies": {
+    "babel-preset-es2015": "^6.24.1",
     "retry": "0.10.1"
   },
   "devDependencies": {
     "ava": "0.18.1",
+    "babel-cli": "^6.24.1",
     "node-fetch": "1.6.3",
     "then-sleep": "1.0.1",
     "xo": "0.17.1"
