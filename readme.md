@@ -19,6 +19,7 @@ await retry(async bail => {
   if (403 === res.status) {
     // don't retry upon 403
     bail(new Error('Unauthorized'))
+    return
   }
 
   const data = await res.text()
