@@ -7,7 +7,7 @@
     "dist"
   ],
   "scripts": {
-    "build": "babel lib/index.js > dist/index.js",
+    "build": "mkdir dist && babel lib/index.js > dist/index.js",
     "test": "npm run build && xo && ava",
     "prepublish": "npm run build"
   },
