@@ -9,8 +9,9 @@ Retrying made simple, easy, async.
 ## How to use
 
 ```js
-import retry from 'async-retry'
-import fetch from 'node-fetch'
+// Packages
+const retry = require('async-retry')
+const fetch = require('node-fetch')
 
 await retry(async bail => {
   // if anything throws, we retry

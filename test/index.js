@@ -1,6 +1,9 @@
+// Packages
 import test from 'ava'
 import fetch from 'node-fetch'
 import sleep from 'then-sleep'
+
+// Ours
 import retry from '../dist'
 
 test('return value', async t => {
