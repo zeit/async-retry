@@ -35,7 +35,6 @@ await retry(async bail => {
 retry(retrier : Function, opts : Object) => Promise
 ```
 
-- Exported as `default`. Use `import retry from 'async-retry'` (ES6) or `require('async-retry').default` (legacy).
 - The supplied function can be `async` or not. In other words, it can be a function that returns a `Promise` or a value.
 - The supplied function receives two parameters
   1. A `Function` you can invoke to abort the retrying (bail)
