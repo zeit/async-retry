@@ -31,12 +31,12 @@
     ]
   },
   "dependencies": {
-    "babel-preset-es2015": "6.24.1",
     "retry": "0.10.1"
   },
   "devDependencies": {
     "ava": "0.18.1",
     "babel-cli": "6.24.1",
+    "babel-preset-es2015": "6.24.1",
     "node-fetch": "1.6.3",
     "then-sleep": "1.0.1",
     "xo": "0.17.1"
