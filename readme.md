@@ -6,7 +6,7 @@
 
 Retrying made simple, easy, async.
 
-## How to use
+## Usage
 
 ```js
 // Packages
@@ -48,7 +48,7 @@ retry(retrier : Function, opts : Object) => Promise
   * `randomize`: Randomizes the timeouts by multiplying with a factor between `1` to `2`. Default is `false`.
   * `onRetry`: an optional `Function` that is invoked after a new retry is performed. It's passed the `Error` that triggered it as a parameter.
 
-## Credits
+## Authors
 
 - Guillermo Rauch ([@rauchg](https://twitter.com/rauchg)) - [▲ZEIT](https://zeit.co)
 - Leo Lamprecht ([@notquiteleo](https://twitter.com/notquiteleo)) - [▲ZEIT](https://zeit.co)
