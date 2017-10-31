@@ -1,10 +1,10 @@
 // Packages
-import test from 'ava'
-import fetch from 'node-fetch'
-import sleep from 'then-sleep'
+const test = require('ava')
+const fetch = require('node-fetch')
+const sleep = require('then-sleep')
 
 // Ours
-import retry from '../dist'
+const retry = require('../')
 
 test('return value', async t => {
   const val = await retry(async (bail, num) => {
