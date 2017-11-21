@@ -90,3 +90,19 @@ test('return non-async', async t => {
   const val = await retry(() => 5)
   t.deepEqual(5, val)
 })
+
+test('with number of retries', async t => {
+  let retries = 0;
+  try {
+    await retry((bail, num) => {
+      return fetch('https://www.fakewikipedia.org')
+    }, {
+      retries: 2,
+      onRetry: (err, i) => {
+        retries = i;
+      }
+    })
+  } catch (err) {
+    t.deepEqual(retries, 2);
+  }
+})
