@@ -42,7 +42,7 @@ test('bail', async t => {
 
         throw new Error('Test ' + num)
       },
-      { retries: 3 }
+      {retries: 3}
     )
   } catch (err) {
     t.deepEqual('Wont retry', err.message)
@@ -76,7 +76,7 @@ test('bail error', async t => {
         err.bail = true
         throw err
       },
-      { retries: 3 }
+      {retries: 3}
     )
   } catch (err) {
     t.deepEqual('Wont retry', err.message)
@@ -90,7 +90,7 @@ test('with non-async functions', async t => {
       (bail, num) => {
         throw new Error('Test ' + num)
       },
-      { retries: 2 }
+      {retries: 2}
     )
   } catch (err) {
     t.deepEqual('Test 3', err.message)
@@ -106,14 +106,17 @@ test('with number of retries', async t => {
   let retries = 0
   try {
     await retry(
-      bail => {
+      () => {
         return fetch('https://www.fakewikipedia.org')
       },
       {
         retries: 2,
         onRetry: (err, i) => {
-          err && (retries = i)
-        },
+          if (err) {
+            console.log('Retry error : ', err)
+          }
+          retries = i
+        }
       }
     )
   } catch (err) {
