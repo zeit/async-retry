@@ -34,13 +34,16 @@ test('chained promise', async t => {
 
 test('bail', async t => {
   try {
-    await retry(async (bail, num) => {
-      if (num === 2) {
-        bail(new Error('Wont retry'))
-      }
+    await retry(
+      async (bail, num) => {
+        if (num === 2) {
+          bail(new Error('Wont retry'))
+        }
 
-      throw new Error('Test ' + num)
-    }, {retries: 3})
+        throw new Error('Test ' + num)
+      },
+      {retries: 3}
+    )
   } catch (err) {
     t.deepEqual('Wont retry', err.message)
   }
@@ -49,11 +52,13 @@ test('bail', async t => {
 test('bail + return', async t => {
   let _err
   try {
-    await Promise.resolve(retry(async bail => {
-      await sleep(200)
-      await sleep(200)
-      bail(new Error('woot'))
-    }))
+    await Promise.resolve(
+      retry(async bail => {
+        await sleep(200)
+        await sleep(200)
+        bail(new Error('woot'))
+      })
+    )
   } catch (err) {
     _err = err
   }
@@ -63,13 +68,16 @@ test('bail + return', async t => {
 test('bail error', async t => {
   let retries = 0
   try {
-    await retry(async () => {
-      retries++
-      await sleep(100)
-      const err = Error('Wont retry')
-      err.bail = true
-      throw err
-    }, {retries: 3})
+    await retry(
+      async () => {
+        retries++
+        await sleep(100)
+        const err = Error('Wont retry')
+        err.bail = true
+        throw err
+      },
+      {retries: 3}
+    )
   } catch (err) {
     t.deepEqual('Wont retry', err.message)
   }
@@ -78,9 +86,12 @@ test('bail error', async t => {
 
 test('with non-async functions', async t => {
   try {
-    await retry((bail, num) => {
-      throw new Error('Test ' + num)
-    }, {retries: 2})
+    await retry(
+      (bail, num) => {
+        throw new Error('Test ' + num)
+      },
+      {retries: 2}
+    )
   } catch (err) {
     t.deepEqual('Test 3', err.message)
   }
@@ -89,4 +100,26 @@ test('with non-async functions', async t => {
 test('return non-async', async t => {
   const val = await retry(() => 5)
   t.deepEqual(5, val)
+})
+
+test('with number of retries', async t => {
+  let retries = 0
+  try {
+    await retry(
+      () => {
+        return fetch('https://www.fakewikipedia.org')
+      },
+      {
+        retries: 2,
+        onRetry: (err, i) => {
+          if (err) {
+            console.log('Retry error : ', err)
+          }
+          retries = i
+        }
+      }
+    )
+  } catch (err) {
+    t.deepEqual(retries, 2)
+  }
 })
