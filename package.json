@@ -1,6 +1,6 @@
 {
   "name": "async-retry",
-  "version": "1.1.4",
+  "version": "1.2.0",
   "description": "Retrying made simple, easy and async",
   "main": "./lib/index.js",
   "scripts": {
