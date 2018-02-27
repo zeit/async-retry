@@ -23,9 +23,9 @@
     "retry": "0.10.1"
   },
   "devDependencies": {
-    "ava": "0.23.0",
-    "node-fetch": "1.7.3",
+    "ava": "0.25.0",
+    "node-fetch": "2.0.0",
     "then-sleep": "1.0.1",
-    "xo": "0.18.2"
+    "xo": "0.20.3"
   }
 }
