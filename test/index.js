@@ -4,16 +4,18 @@ const fetch = require('node-fetch')
 const sleep = require('then-sleep')
 
 // Ours
-const retry = require('../')
+const retry = require('../lib')
 
 test('return value', async t => {
   const val = await retry(async (bail, num) => {
     if (num < 2) {
       throw new Error('woot')
     }
+
     await sleep(50)
     return 'woot ' + num
   })
+
   t.deepEqual('woot 2', val)
 })
 
@@ -27,8 +29,10 @@ test('chained promise', async t => {
     if (num < 2) {
       throw new Error('retry')
     }
+
     return fetch('https://www.wikipedia.org')
   })
+
   t.deepEqual(200, res.status)
 })
 
@@ -51,6 +55,7 @@ test('bail', async t => {
 
 test('bail + return', async t => {
   let _err
+
   try {
     await Promise.resolve(
       retry(async bail => {
@@ -62,17 +67,19 @@ test('bail + return', async t => {
   } catch (err) {
     _err = err
   }
+
   t.deepEqual(_err.message, 'woot')
 })
 
 test('bail error', async t => {
   let retries = 0
+
   try {
     await retry(
       async () => {
         retries++
         await sleep(100)
-        const err = Error('Wont retry')
+        const err = new Error('Wont retry')
         err.bail = true
         throw err
       },
@@ -81,6 +88,7 @@ test('bail error', async t => {
   } catch (err) {
     t.deepEqual('Wont retry', err.message)
   }
+
   t.deepEqual(retries, 1)
 })
 
@@ -104,6 +112,7 @@ test('return non-async', async t => {
 
 test('with number of retries', async t => {
   let retries = 0
+
   try {
     await retry(
       () => {
