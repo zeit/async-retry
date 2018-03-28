@@ -26,7 +26,7 @@ await retry(async bail => {
   const data = await res.text()
   return data.substr(0, 500)
 }, {
-  retries: 500
+  retries: 5
 })
 ```
 
