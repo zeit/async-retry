@@ -4,28 +4,52 @@
   "description": "Retrying made simple, easy and async",
   "main": "./lib/index.js",
   "scripts": {
-    "test": "xo && ava"
+    "test": "yarn run test-lint && yarn run test-unit",
+    "test-lint": "eslint .",
+    "test-unit": "ava",
+    "lint:staged": "lint-staged"
   },
+  "files": [
+    "lib"
+  ],
   "license": "MIT",
   "repository": "zeit/async-retry",
   "ava": {
     "failFast": true
   },
-  "xo": {
-    "esnext": true,
-    "space": true,
-    "semicolon": false,
-    "ignores": [
-      "examples/**/*"
+  "dependencies": {
+    "retry": "0.12.0"
+  },
+  "pre-commit": "lint:staged",
+  "lint-staged": {
+    "*.js": [
+      "eslint",
+      "prettier --write --single-quote",
+      "git add"
     ]
   },
-  "dependencies": {
-    "retry": "0.10.1"
+  "eslintConfig": {
+    "extends": [
+      "airbnb",
+      "prettier"
+    ],
+    "rules": {
+        "no-var": 0,
+        "prefer-arrow-callback": 0
+    }
   },
   "devDependencies": {
     "ava": "0.25.0",
-    "node-fetch": "2.0.0",
-    "then-sleep": "1.0.1",
-    "xo": "0.20.3"
+    "eslint": "5.5.0",
+    "eslint-config-airbnb": "17.1.0",
+    "eslint-config-prettier": "3.0.1",
+    "eslint-plugin-import": "2.14.0",
+    "eslint-plugin-jsx-a11y": "6.1.1",
+    "eslint-plugin-react": "7.11.1",
+    "lint-staged": "7.2.2",
+    "node-fetch": "2.2.0",
+    "pre-commit": "1.2.2",
+    "prettier": "1.14.2",
+    "then-sleep": "1.0.1"
   }
 }
