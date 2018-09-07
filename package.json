@@ -9,6 +9,9 @@
     "test-unit": "ava",
     "lint:staged": "lint-staged"
   },
+  "files": [
+    "lib"
+  ],
   "license": "MIT",
   "repository": "zeit/async-retry",
   "ava": {
