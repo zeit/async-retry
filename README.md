@@ -1,10 +1,9 @@
 # async-retry
 
-[![Build Status](https://circleci.com/gh/zeit/async-retry.svg?&style=shield)](https://circleci.com/gh/zeit/workflows/async-retry)
 [![Code Style](https://badgen.net/badge/code%20style/airbnb/fd5c63)](https://github.com/airbnb/javascript)
 [![Join the community on Spectrum](https://withspectrum.github.io/badge/badge.svg)](https://spectrum.chat/zeit)
 
-Retrying made simple, easy, async.
+Retrying made simple, easy, and async.
 
 ## Usage
 
