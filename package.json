@@ -6,7 +6,8 @@
   "scripts": {
     "test": "yarn run test-lint && yarn run test-unit",
     "test-lint": "eslint .",
-    "test-unit": "ava"
+    "test-unit": "ava",
+    "lint:staged": "lint-staged"
   },
   "license": "MIT",
   "repository": "zeit/async-retry",
@@ -16,9 +17,31 @@
   "dependencies": {
     "retry": "0.12.0"
   },
+  "pre-commit": "lint:staged",
+  "lint-staged": {
+    "*.js": [
+      "eslint",
+      "prettier --write --single-quote",
+      "git add"
+    ]
+  },
+  "eslintConfig": {
+    "extends": [
+      "airbnb",
+      "prettier"
+    ]
+  },
   "devDependencies": {
     "ava": "0.25.0",
+    "eslint": "5.3.0",
+    "eslint-config-airbnb": "17.1.0",
+    "eslint-plugin-import": "2.14.0",
+    "eslint-plugin-jsx-a11y": "6.1.1",
+    "eslint-plugin-react": "7.11.0",
+    "lint-staged": "7.2.2",
     "node-fetch": "2.2.0",
+    "pre-commit": "1.2.2",
+    "prettier": "1.14.2",
     "then-sleep": "1.0.1"
   }
 }
