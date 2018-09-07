@@ -1,6 +1,6 @@
 {
   "name": "async-retry",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "Retrying made simple, easy and async",
   "main": "./lib/index.js",
   "scripts": {
@@ -34,8 +34,8 @@
       "prettier"
     ],
     "rules": {
-        "no-var": 0,
-        "prefer-arrow-callback": 0
+      "no-var": 0,
+      "prefer-arrow-callback": 0
     }
   },
   "devDependencies": {
