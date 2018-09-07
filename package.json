@@ -4,20 +4,14 @@
   "description": "Retrying made simple, easy and async",
   "main": "./lib/index.js",
   "scripts": {
-    "test": "xo && ava"
+    "test": "yarn run test-lint && yarn run test-unit",
+    "test-lint": "eslint .",
+    "test-unit": "ava"
   },
   "license": "MIT",
   "repository": "zeit/async-retry",
   "ava": {
     "failFast": true
-  },
-  "xo": {
-    "esnext": true,
-    "space": true,
-    "semicolon": false,
-    "ignores": [
-      "examples/**/*"
-    ]
   },
   "dependencies": {
     "retry": "0.12.0"
@@ -25,7 +19,6 @@
   "devDependencies": {
     "ava": "0.25.0",
     "node-fetch": "2.2.0",
-    "then-sleep": "1.0.1",
-    "xo": "0.23.0"
+    "then-sleep": "1.0.1"
   }
 }
