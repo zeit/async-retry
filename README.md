@@ -1,10 +1,9 @@
 # async-retry
 
-[![Build Status](https://travis-ci.org/zeit/async-retry.svg?branch=master)](https://travis-ci.org/zeit/async-retry)
-[![XO code style](https://img.shields.io/badge/code_style-XO-5ed9c7.svg)](https://github.com/sindresorhus/xo)
-[![Slack Channel](http://zeit-slackin.now.sh/badge.svg)](https://zeit.chat/)
+[![Code Style](https://badgen.net/badge/code%20style/airbnb/fd5c63)](https://github.com/airbnb/javascript)
+[![Join the community on Spectrum](https://withspectrum.github.io/badge/badge.svg)](https://spectrum.chat/zeit)
 
-Retrying made simple, easy, async.
+Retrying made simple, easy, and async.
 
 ## Usage
 
@@ -26,7 +25,7 @@ await retry(async bail => {
   const data = await res.text()
   return data.substr(0, 500)
 }, {
-  retries: 500
+  retries: 5
 })
 ```
 
@@ -50,5 +49,5 @@ retry(retrier : Function, opts : Object) => Promise
 
 ## Authors
 
-- Guillermo Rauch ([@rauchg](https://twitter.com/rauchg)) - [▲ZEIT](https://zeit.co)
-- Leo Lamprecht ([@notquiteleo](https://twitter.com/notquiteleo)) - [▲ZEIT](https://zeit.co)
+- Guillermo Rauch ([@rauchg](https://twitter.com/rauchg)) - [ZEIT](https://zeit.co)
+- Leo Lamprecht ([@notquiteleo](https://twitter.com/notquiteleo)) - [ZEIT](https://zeit.co)
