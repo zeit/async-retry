@@ -1,125 +1,131 @@
 // Packages
-const test = require('ava')
-const fetch = require('node-fetch')
-const sleep = require('then-sleep')
+const test = require('ava');
+const fetch = require('node-fetch');
+const sleep = require('then-sleep');
 
 // Ours
-const retry = require('../')
+const retry = require('../lib');
 
 test('return value', async t => {
   const val = await retry(async (bail, num) => {
     if (num < 2) {
-      throw new Error('woot')
+      throw new Error('woot');
     }
-    await sleep(50)
-    return 'woot ' + num
-  })
-  t.deepEqual('woot 2', val)
-})
+
+    await sleep(50);
+    return `woot ${num}`;
+  });
+
+  t.deepEqual('woot 2', val);
+});
 
 test('return value no await', async t => {
-  const val = await retry(async (bail, num) => num)
-  t.deepEqual(1, val)
-})
+  const val = await retry(async (bail, num) => num);
+  t.deepEqual(1, val);
+});
 
 test('chained promise', async t => {
   const res = await retry(async (bail, num) => {
     if (num < 2) {
-      throw new Error('retry')
+      throw new Error('retry');
     }
-    return fetch('https://www.wikipedia.org')
-  })
-  t.deepEqual(200, res.status)
-})
+
+    return fetch('https://www.wikipedia.org');
+  });
+
+  t.deepEqual(200, res.status);
+});
 
 test('bail', async t => {
   try {
     await retry(
       async (bail, num) => {
         if (num === 2) {
-          bail(new Error('Wont retry'))
+          bail(new Error('Wont retry'));
         }
 
-        throw new Error('Test ' + num)
+        throw new Error(`Test ${num}`);
       },
-      {retries: 3}
-    )
+      { retries: 3 }
+    );
   } catch (err) {
-    t.deepEqual('Wont retry', err.message)
+    t.deepEqual('Wont retry', err.message);
   }
-})
+});
 
 test('bail + return', async t => {
-  let _err
+  let error;
+
   try {
     await Promise.resolve(
       retry(async bail => {
-        await sleep(200)
-        await sleep(200)
-        bail(new Error('woot'))
+        await sleep(200);
+        await sleep(200);
+        bail(new Error('woot'));
       })
-    )
+    );
   } catch (err) {
-    _err = err
+    error = err;
   }
-  t.deepEqual(_err.message, 'woot')
-})
+
+  t.deepEqual(error.message, 'woot');
+});
 
 test('bail error', async t => {
-  let retries = 0
+  let retries = 0;
+
   try {
     await retry(
       async () => {
-        retries++
-        await sleep(100)
-        const err = Error('Wont retry')
-        err.bail = true
-        throw err
+        retries += 1;
+        await sleep(100);
+        const err = new Error('Wont retry');
+        err.bail = true;
+        throw err;
       },
-      {retries: 3}
-    )
+      { retries: 3 }
+    );
   } catch (err) {
-    t.deepEqual('Wont retry', err.message)
+    t.deepEqual('Wont retry', err.message);
   }
-  t.deepEqual(retries, 1)
-})
+
+  t.deepEqual(retries, 1);
+});
 
 test('with non-async functions', async t => {
   try {
     await retry(
       (bail, num) => {
-        throw new Error('Test ' + num)
+        throw new Error(`Test ${num}`);
       },
-      {retries: 2}
-    )
+      { retries: 2 }
+    );
   } catch (err) {
-    t.deepEqual('Test 3', err.message)
+    t.deepEqual('Test 3', err.message);
   }
-})
+});
 
 test('return non-async', async t => {
-  const val = await retry(() => 5)
-  t.deepEqual(5, val)
-})
+  const val = await retry(() => 5);
+  t.deepEqual(5, val);
+});
 
 test('with number of retries', async t => {
-  let retries = 0
+  let retries = 0;
+
   try {
-    await retry(
-      () => {
-        return fetch('https://www.fakewikipedia.org')
-      },
-      {
-        retries: 2,
-        onRetry: (err, i) => {
-          if (err) {
-            console.log('Retry error : ', err)
-          }
-          retries = i
+    await retry(() => fetch('https://www.fakewikipedia.org'), {
+      retries: 2,
+      onRetry: (err, i) => {
+        if (err) {
+          // eslint-disable-next-line no-console
+          console.log('Retry error : ', err);
         }
+
+        retries = i;
       }
-    )
+    });
   } catch (err) {
-    t.deepEqual(retries, 2)
+    t.deepEqual(retries, 2);
   }
-})
+});
