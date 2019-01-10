@@ -46,7 +46,8 @@ retry(retrier : Function, opts : Object) => Promise
   * `maxTimeout`: The maximum number of milliseconds between two retries. Default is `Infinity`.
   * `randomize`: Randomizes the timeouts by multiplying with a factor between `1` to `2`. Default is `false`.
   * `onRetry`: an optional `Function` that is invoked after a new retry is performed. It's passed the `Error` that triggered it as a parameter.
-
+  * `awaitOnRetry`: An optional flag to wait for `onRetry` to resolve before retrying.
+  
 ## Authors
 
 - Guillermo Rauch ([@rauchg](https://twitter.com/rauchg)) - [ZEIT](https://zeit.co)

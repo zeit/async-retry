@@ -116,16 +116,31 @@ test('with number of retries', async t => {
   try {
     await retry(() => fetch('https://www.fakewikipedia.org'), {
       retries: 2,
-      onRetry: (err, i) => {
-        if (err) {
-          // eslint-disable-next-line no-console
-          console.log('Retry error : ', err);
-        }
-
+      onRetry: (_, i) => {
         retries = i;
       }
     });
   } catch (err) {
     t.deepEqual(retries, 2);
+  }
+});
+
+test('wait for async onRetry', async t => {
+  const timeout = 1500;
+  let before;
+  let after;
+
+  try {
+    await retry(() => fetch('https://www.fakewikipedia.org'), {
+      retries: 2,
+      awaitOnRetry: true,
+      onRetry: async () => {
+        before = Date.now();
+        await sleep(timeout);
+        after = Date.now();
+      }
+    });
+  } catch (err) {
+    t.is(after - before >= timeout, true);
   }
 });
