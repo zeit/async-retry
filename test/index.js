@@ -126,7 +126,7 @@ test('with number of retries', async t => {
 });
 
 test('wait for async onRetry', async t => {
-  const timeout = 1500;
+  const timeout = 1000;
   let before;
   let after;
 
