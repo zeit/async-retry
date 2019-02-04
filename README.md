@@ -2,6 +2,7 @@
 
 [![Code Style](https://badgen.net/badge/code%20style/airbnb/fd5c63)](https://github.com/airbnb/javascript)
 [![Join the community on Spectrum](https://withspectrum.github.io/badge/badge.svg)](https://spectrum.chat/zeit)
+[![Downloads](http://img.shields.io/npm/dm/async-retry.svg)](https://npmjs.org/package/async-retry)
 
 Retrying made simple, easy, and async.
 
