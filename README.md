@@ -44,7 +44,7 @@ retry(retrier : Function, opts : Object) => Promise
   * `factor`: The exponential factor to use. Default is `2`.
   * `minTimeout`: The number of milliseconds before starting the first retry. Default is `1000`.
   * `maxTimeout`: The maximum number of milliseconds between two retries. Default is `Infinity`.
-  * `randomize`: Randomizes the timeouts by multiplying with a factor between `1` to `2`. Default is `false`.
+  * `randomize`: Randomizes the timeouts by multiplying with a factor between `1` to `2`. Default is `true`.
   * `onRetry`: an optional `Function` that is invoked after a new retry is performed. It's passed the `Error` that triggered it as a parameter.
 
 ## Authors
