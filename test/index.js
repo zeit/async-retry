@@ -93,16 +93,18 @@ test('bail error', async t => {
 });
 
 test('nested bail', async t => {
-  let retries = 0;
+  let retries1 = 0;
+  let retries2 = 0;
 
   try {
     await retry(
       async () => {
+        retries1 += 1;
         await retry(
           async () => {
-            retries += 1;
+            retries2 += 1;
             await sleep(100);
-            const err = new Error('Wont retry');
+            const err = new Error('woot');
             err.bail = true;
             throw err;
           },
@@ -112,10 +114,11 @@ test('nested bail', async t => {
       { factor: 1, retries: 7 }
     );
   } catch (err) {
-    t.deepEqual('Wont retry', err.message);
+    t.deepEqual('woot', err.message);
   }
 
-  t.deepEqual(retries, 8);
+  t.deepEqual(retries1, 8);
+  t.deepEqual(retries2, 8);
 });
 
 test('with non-async functions', async t => {
