@@ -92,6 +92,35 @@ test('bail error', async t => {
   t.deepEqual(retries, 1);
 });
 
+test('nested bail', async t => {
+  let retries1 = 0;
+  let retries2 = 0;
+
+  try {
+    await retry(
+      async () => {
+        retries1 += 1;
+        await retry(
+          async () => {
+            retries2 += 1;
+            await sleep(100);
+            const err = new Error('woot');
+            err.bail = true;
+            throw err;
+          },
+          { retries: 3 }
+        );
+      },
+      { factor: 1, retries: 7 }
+    );
+  } catch (err) {
+    t.deepEqual('woot', err.message);
+  }
+
+  t.deepEqual(retries1, 8);
+  t.deepEqual(retries2, 8);
+});
+
 test('with non-async functions', async t => {
   try {
     await retry(
