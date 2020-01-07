@@ -117,15 +117,31 @@ test('with number of retries', async t => {
     await retry(() => fetch('https://www.fakewikipedia.org'), {
       retries: 2,
       onRetry: (err, i) => {
-        if (err) {
-          // eslint-disable-next-line no-console
-          console.log('Retry error : ', err);
-        }
-
         retries = i;
       }
     });
   } catch (err) {
     t.deepEqual(retries, 2);
+  }
+});
+
+test('bail on TypeError', async t => {
+  let val;
+  try {
+    await retry(
+      () => {
+        var num = 1;
+        num.toUpperCase();
+      },
+      {
+        retries: 10,
+        bailOnTypeError: true,
+        onRetry: (_, i) => {
+          val = i;
+        }
+      }
+    );
+  } catch (err) {
+    t.deepEqual(undefined, val);
   }
 });
