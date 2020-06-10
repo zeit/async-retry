@@ -129,3 +129,19 @@ test('with number of retries', async t => {
     t.deepEqual(retries, 2);
   }
 });
+
+test('with delay of retries', async t => {
+  let round = 0;
+  function response(value, retries) {
+    if (round < retries) {
+      round += 1;
+      return Promise.reject(new Error('retries not enough'));
+    }
+    return Promise.resolve(value);
+  }
+  const startTime = Date.now();
+  const delayDuration = 2 * 1000;
+  await retry(() => response(5, 2), { retries: 2, retryDelay: delayDuration });
+  const executeDuration = Date.now() - startTime;
+  t.true(executeDuration > delayDuration * 2);
+});
